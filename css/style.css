@@ -9,11 +9,12 @@ body, html
 .container
 {
     background-image: url("../images/bg.jpg");
-    background-position: center;
+    background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100%;
     width: 100%;
+    text-align: center;
 }
 
 #header_splash
@@ -22,6 +23,135 @@ body, html
     font-weight: 100;
     color: #F2F2F2;
     text-align: center;
-    font-size: 5em;
-    padding-top: 200px;
+    font-size: 3em;
+    padding-top: 15%;
+}
+
+#logo_splash
+{
+    width: 80%;
+    max-width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+#slogan_splash
+{
+    color: white;
+    font-family: 'Helvetica Neue';
+    font-weight: 200;
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.button
+{
+    text-decoration: none;
+    border: 1px solid white;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+    padding-top: 10px;
+    border-radius: 5px;
+    font-family: "Helvetica Neue";
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+.full_blue
+{
+    background-color: #2980B9;
+    color: #F2F2F2;
+    border: 2px solid #2980B9;
+}
+
+.ghost_blue
+{
+    border: 2px solid #2980B9;
+    color: #F2F2F2;
+}
+
+header
+{
+    background-color: rgba(242, 242, 242, .85);
+    padding-bottom: 15px;
+}
+
+header img
+{
+    width: 30%;
+    padding-top: 15px;
+}
+
+.form
+{
+    margin-top: 75px;
+}
+
+.form input
+{
+    border: none;
+    background-color: rgba(242, 242, 242, .8);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding: 15px 5px
+}
+
+::-webkit-input-placeholder
+{
+    color: rgba(128, 128, 128, 0.5);
+    font-style: italic;
+    font-size: 0.9em
+}
+
+:-moz-placeholder
+{
+    color: rgba(128, 128, 128, 0.5);
+    font-style: italic;
+    font-size: 0.9em
+}
+
+::-moz-placeholder
+{
+    color: rgba(128, 128, 128, 0.5);
+    font-style: italic;
+    font-size: 0.9em
+}
+
+:-ms-input-placeholder
+{  
+    color: rgba(128, 128, 128, 0.5);
+    font-style: italic;
+    font-size: 0.9em
+}
+
+#login_screen_button
+{
+    margin-top: 40px;
+    text-decoration: none;
+    border: 1px solid white;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    padding-top: 10px;
+    border-radius: 1px;
+    font-size: 1em;
+    font-family: "Helvetica Neue";
+    text-transform: uppercase;
+    font-weight: 100;
+    background-color: #2980B9;
+    color: #F2F2F2;
+    border: 2px solid #2980B9;
 }

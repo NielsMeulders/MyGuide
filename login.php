@@ -14,13 +14,22 @@
 
     <div class="container">
         
-        <h1 id="header_splash">WELCOME TO</h1>
+        <header>
+            <img src="images/logo_full.png" alt="logo">
+        </header>
         
-        <img id="logo_splash" src="images/logo.png" alt="Logo">
-        <p id="slogan_splash">Your guide booking app</p>
-        
-        <a class="button full_blue" href="register.php">Register</a><br>
-        <a class="button ghost_blue" href="login.php">Log in</a>
+        <section class="form">
+            
+            <form action="" method="post">
+            
+                <input type="text" id="email" name="email" placeholder="Email address"><br>
+                <input type="password" id="pass" name="pass" placeholder="Password">
+
+                <input type="submit" id="login_screen_button" value="Log in!">
+            
+            </form>            
+            
+        </section>
         
     </div>
 
