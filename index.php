@@ -22,6 +22,8 @@
         <a class="button full_blue" href="register.php">Register</a><br>
         <a class="button ghost_blue" href="login.php">Log in</a>
         
+        <footer><p>&copy; Niels Meulders - 2015</p></footer>
+        
     </div>
 
 </body>

@@ -30,10 +30,17 @@
             
             <form action="" method="post">
             
-                <input type="text" id="email" name="email" placeholder="Email address"><br>
-                <input type="password" id="pass" name="pass" placeholder="Password">
+               <input type="text" id="name" name="name" placeholder="Name"><br>
+               <input type="email" id="email" name="email" placeholder="Email address"><br>
+               <input type="password" id="pass" name="pass" placeholder="Password"><br>
+               <input type="password" id="pass_rep" name="pass_rep" placeholder="Retype password"><br>
+               
+               <div class="container_radio">
+                   <input class="radio_btn" type="radio" name="type" id="tourist" value="tourist"><label class="label_radio_button" for="tourist">I'm a tourist</label></input><br>
+                   <input class="radio_btn" type="radio" name="type" id="guide" value="guide"><label class="label_radio_button" for="guide">I'm a guide</label>
+               </div>
 
-                <input type="submit" id="login_screen_button" value="Log in!">
+               <input type="submit" id="login_screen_button" value="Register!">
             
             </form>            
             

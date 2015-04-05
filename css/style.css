@@ -3,15 +3,16 @@ body, html
     margin: 0;
     height: 100%;
     color: #333333;
-    font-family: 'SourceSans';
+    font-family: 'Helvetica Neue';
 }
 
 .container
 {
-    background-image: url("../images/bg.jpg");
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: url("../images/bg.jpg") no-repeat center top fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
     min-height: 100%;
     width: 100%;
     text-align: center;
@@ -19,12 +20,11 @@ body, html
 
 #header_splash
 {
-    font-family: 'Helvetica Neue';
     font-weight: 100;
     color: #F2F2F2;
     text-align: center;
     font-size: 3em;
-    padding-top: 15%;
+    padding-top: 10%;
 }
 
 #logo_splash
@@ -40,7 +40,6 @@ body, html
 #slogan_splash
 {
     color: white;
-    font-family: 'Helvetica Neue';
     font-weight: 200;
     margin-top: 10px;
     margin-bottom: 70px;
@@ -56,8 +55,7 @@ body, html
     margin-right: auto;
     height: 30px;
     padding-top: 10px;
-    border-radius: 5px;
-    font-family: "Helvetica Neue";
+    border-radius: 3px;
     text-transform: uppercase;
     font-weight: 200;
 }
@@ -75,6 +73,19 @@ body, html
     color: #F2F2F2;
 }
 
+footer
+{
+    color: #F2F2F2;
+    font-size: .7em;
+    font-weight: 100;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    bottom: 10px;
+    
+}
+
 header
 {
     background-color: rgba(242, 242, 242, .85);
@@ -85,6 +96,14 @@ header img
 {
     width: 30%;
     padding-top: 15px;
+}
+
+.btn_back
+{
+    width: 45px;
+    position: absolute;
+    left: 8%;
+    top: 5px;
 }
 
 .form
@@ -111,28 +130,32 @@ header img
 {
     color: rgba(128, 128, 128, 0.5);
     font-style: italic;
-    font-size: 0.9em
+    font-size: 0.9em;
+    font-weight: 100;
 }
 
 :-moz-placeholder
 {
     color: rgba(128, 128, 128, 0.5);
     font-style: italic;
-    font-size: 0.9em
+    font-size: 0.9em;
+    font-weight: 100;
 }
 
 ::-moz-placeholder
 {
     color: rgba(128, 128, 128, 0.5);
     font-style: italic;
-    font-size: 0.9em
+    font-size: 0.9em;
+    font-weight: 100;
 }
 
 :-ms-input-placeholder
 {  
     color: rgba(128, 128, 128, 0.5);
     font-style: italic;
-    font-size: 0.9em
+    font-size: 0.9em;
+    font-weight: 100;
 }
 
 #login_screen_button
@@ -146,12 +169,33 @@ header img
     margin-right: auto;
     height: auto;
     padding-top: 10px;
-    border-radius: 1px;
+    border-radius: 3px;
     font-size: 1em;
-    font-family: "Helvetica Neue";
     text-transform: uppercase;
     font-weight: 100;
     background-color: #2980B9;
     color: #F2F2F2;
     border: 2px solid #2980B9;
+    -webkit-appearance: none;
+}
+
+input.radio_btn
+{
+    display: inline;
+    width: auto;
+}
+
+.label_radio_button
+{
+    color: #F2F2F2;
+    margin-left: 10px;
+}
+
+.container_radio
+{
+    text-align: left;
+    width: 70%;
+    max-width: 500px;
+    margin: 0 auto;
+    vertical-align: middle;
 }
