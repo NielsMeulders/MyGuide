@@ -1,6 +1,42 @@
 <?PHP
 
-    
+    if (!empty($_POST))
+    {
+        include_once("classes/Guide.class.php");
+        include_once("classes/Tourist.class.php");
+
+        try
+        {
+            if (!empty($_POST['type']))
+            {
+                $type_guide = $_POST['type'];
+            }
+            else
+            {
+                throw new Exception("Type is required!");
+            }
+            switch($type_guide)
+            {
+                case 'tourist':
+                    $u = new Tourist();
+                    break;
+
+                case 'guide':
+                    $u = new Guide();
+                    break;
+            }
+            $u->checkPass($_POST['pass'],$_POST['pass_rep']);
+            $u->Name = $_POST['name'];
+            $u->Email = $_POST['email'];
+            $u->Password = $_POST['pass'];
+            $u->save();
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
 
 ?>
 

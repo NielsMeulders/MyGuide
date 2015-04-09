@@ -1,6 +1,7 @@
 body, html
 {
     margin: 0;
+    padding: 0;
     height: 100%;
     color: #333333;
     font-family: 'Helvetica Neue';
@@ -123,12 +124,12 @@ header img
     height: auto;
     border-radius: 5px;
     font-size: 1.5em;
-    padding: 15px 5px
+    padding: 10px 15px;
 }
 
 ::-webkit-input-placeholder
 {
-    color: rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 1);
     font-style: italic;
     font-size: 0.9em;
     font-weight: 100;
@@ -136,7 +137,7 @@ header img
 
 :-moz-placeholder
 {
-    color: rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 1);
     font-style: italic;
     font-size: 0.9em;
     font-weight: 100;
@@ -144,7 +145,7 @@ header img
 
 ::-moz-placeholder
 {
-    color: rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 1);
     font-style: italic;
     font-size: 0.9em;
     font-weight: 100;
@@ -152,7 +153,7 @@ header img
 
 :-ms-input-placeholder
 {  
-    color: rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 1);
     font-style: italic;
     font-size: 0.9em;
     font-weight: 100;
