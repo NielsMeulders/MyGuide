@@ -1,6 +1,27 @@
 <?PHP
 
-    
+    include_once("classes/Db.class.php");
+
+    if (!empty($_POST))
+    {
+        try
+        {
+            $conn = Db::getInstance();
+            $post = $conn->prepare("SELECT * FROM tbl_guide WHERE email=?");
+            $post->execute(array($_POST['email']));
+            $row = $post->fetch(PDO::FETCH_ASSOC);
+
+            if (password_verify($_POST['pass'], $row['password'])) {
+                header('Location: http://www.nielsmeulders.be');
+            } else {
+                throw new Exception("Password is incorrect!");
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 
 ?>
 

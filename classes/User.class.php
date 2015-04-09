@@ -27,7 +27,14 @@
                 case 'Email':
                     if ($p_vValue!="")
                     {
-                        $this->m_sEmail = $p_vValue;
+                        if ($this->checkEmail($p_vValue) === true)
+                        {
+                            $this->m_sEmail = $p_vValue;
+                        }
+                        else
+                        {
+                            throw new Exception("Email is already in use!");
+                        }
                     }
                     else
                     {
@@ -38,7 +45,8 @@
                 case 'Password':
                     if ($p_vValue!="")
                     {
-                        $this->m_sPassword = $p_vValue;
+                        $options = array('cost' => 12);
+                        $this->m_sPassword = password_hash($p_vValue, PASSWORD_BCRYPT, $options);
                     }
                     else
                     {
@@ -109,7 +117,7 @@
         public function getAll()
         {
             $conn = Db::getInstance();
-            $allposts = $conn->query("SELECT * FROM student");
+            $allposts = $conn->query("SELECT * FROM tbl_guide");
             return $allposts;
         }
 
@@ -130,6 +138,23 @@
                     throw new Exception("Passwords don't match!");
                 }
             }
+        }
+
+        public function checkEmail($p_sCheckEmail)
+        {
+            $ret = true;
+
+            $all_mails = $this->getAll();
+            while($row = $all_mails->fetch(PDO::FETCH_ASSOC)) {
+
+                if($row['email'] == $p_sCheckEmail)
+                {
+                    $ret = false;
+                }
+
+            }
+
+            return $ret;
         }
 
     }
