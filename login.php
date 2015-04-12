@@ -4,6 +4,7 @@
 
     if (!empty($_POST))
     {
+        session_start();
         try
         {
             $conn = Db::getInstance();
@@ -12,7 +13,8 @@
             $row = $post->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($_POST['pass'], $row['password'])) {
-                header('Location: http://www.nielsmeulders.be');
+                $_SESSION['loggedIn']=true;
+                header('Location: home.php');
             } else {
                 throw new Exception("Password is incorrect!");
             }
@@ -43,7 +45,7 @@
     <div class="container">
         
         <header>
-            <a href="index.php"><img class="btn_back" src="images/bnt_back.png" alt="Return button"></a>
+            <a href="index.php"><img class="btn_back" src="images/btn_back.png" alt="Return button"></a>
             <img src="images/logo_full.png" alt="logo">
         </header>
         

@@ -1,3 +1,15 @@
+<?PHP
+
+    session_start();
+
+    if(isset($_SESSION['loggedIn']))
+    {
+        header('Location: home.php');
+    }
+
+?>
+
+
 <!doctype html>
 <html lang="nl">
 <head>
