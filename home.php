@@ -1,6 +1,13 @@
 <?PHP
 
 include_once("classes/Db.class.php");
+session_start();
+
+if (!isset($_SESSION['loggedIn']))
+{
+    $link = "<a href='login.php'>login</a>";
+    echo "You have to " . $link . " to view this page!";
+}
 
 if (!empty($_POST))
 {
@@ -21,22 +28,26 @@ $alltours = "lel";
     <link rel="stylesheet" href="css/style.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/script.js"></script>
     <!--<meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />-->
 </head>
 <body>
 
 <div class="container no-bg">
+    
+    <?PHP if (isset($_SESSION['loggedIn'])): ?>
 
     <header id="logged-in-header">
         <a href=""><img class="btn_nav" src="images/btn_nav.png" alt="Nav button"></a>
         <h2 class="header_h">Tours</h2>
-        <a href=""><img class="btn_search" src="images/btn_search.png" alt="Search button"></a>
+        <img id="click_search" class="btn_search" src="images/btn_search.png" alt="Search button">
     </header>
 
-    <div id="search">
+    <div class="search">
         <input type="text" id="term" name="term" placeholder="Search">
-        <input type="submit" id="search_button" value="Search!">
+        <input type="submit" id="search_button" value="">
     </div>
     
     <?PHP if (!isset($alltours)): ?>
@@ -110,6 +121,8 @@ $alltours = "lel";
         <div class="endOfFile"></div>
         
     </footer>
+
+    <?PHP endif; ?>
     
 
 </div>

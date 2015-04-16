@@ -13,19 +13,47 @@
             switch ($p_sProperty)
             {
                 case 'Name':
-
+                    if ($p_sValue!="")
+                    {
+                        $this->m_sName = $p_sValue;
+                    }
+                    else
+                    {
+                        throw new Exception("Name is required!");
+                    }
                     break;
 
                 case 'Duration':
-
+                    if ($p_sValue!="")
+                    {
+                        $this->m_fDuration = $p_sValue;
+                    }
+                    else
+                    {
+                        throw new Exception("Duration is required!");
+                    }
                     break;
 
                 case 'Price':
-
+                    if ($p_sValue!="")
+                    {
+                        $this->m_fPrice = $p_sValue;
+                    }
+                    else
+                    {
+                        throw new Exception("Price is required!");
+                    }
                     break;
 
                 case 'Description':
-
+                    if ($p_sValue!="")
+                    {
+                        $this->m_sDescription = $p_sValue;
+                    }
+                    else
+                    {
+                        throw new Exception("Description is required!");
+                    }
                     break;
             }
         }
