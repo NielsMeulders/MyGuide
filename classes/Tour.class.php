@@ -81,9 +81,27 @@
             }
         }
 
+        public function save()
+        {
+            $conn = Db::getInstance();
+            // errors doorsturen van de database
+            // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $statement = $conn->prepare('INSERT INTO tbl_tour (name,duration,price,description) VALUES  ( :name,:duration,:price,:description)');
+
+            $statement->bindValue(':name',$this->Name);
+            $statement->bindValue(':duration',$this->Duration);
+            $statement->bindValue(':price',$this->Price);
+            $statement->bindValue(':description',$this->Description);
+            $statement->execute();
+        }
+
+        public function getAll()
+        {
+            $conn = Db::getInstance();
+            $alltours = $conn->query("SELECT * FROM tbl_tour");
+            return $alltours;
+        }
 
     }
-
-
 
 ?>
