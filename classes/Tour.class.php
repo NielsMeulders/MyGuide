@@ -1,8 +1,9 @@
 <?PHP
 
-
+    include_once("Db.class.php");
     class Tour
     {
+        private $m_sGuideId;
         private $m_sName;
         private $m_fDuration;
         private $m_fPrice;
@@ -12,6 +13,10 @@
         {
             switch ($p_sProperty)
             {
+                case 'GuideId':
+                    $this->m_sGuideId = $p_sValue;
+                    break;
+
                 case 'Name':
                     if ($p_sValue!="")
                     {
@@ -64,19 +69,19 @@
             switch ($p_sProperty)
             {
                 case 'Name':
-
+                    return $this->m_sName;
                     break;
 
                 case 'Duration':
-
+                    return $this->m_fDuration;
                     break;
 
                 case 'Price':
-
+                    return $this->m_fPrice;
                     break;
 
                 case 'Description':
-
+                    return $this->m_sDescription;
                     break;
             }
         }
