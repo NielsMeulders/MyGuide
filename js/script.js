@@ -4,5 +4,9 @@ $(document).ready(function(){
         $(".search").toggleClass("bar_visible");
     });
     
+     $("#btn_nav").click(function(){
+        $("#nav").toggleClass("visible");
+    });
+    
     
 });
