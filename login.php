@@ -48,7 +48,7 @@
     <div class="container">
         
         <header>
-            <a href="index.php"><img class="btn_back" src="images/btn_back.png" alt="Return button"></a>
+            <a href="index.php"><img class="btn_back" src="images/btn_back.svg" alt="Return button"></a>
             <img src="images/logo_full.png" alt="logo">
         </header>
         

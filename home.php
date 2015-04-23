@@ -1,6 +1,7 @@
 <?PHP
 
 include_once("classes/Db.class.php");
+include_once("classes/Tour.class.php");
 session_start();
 
 if (!isset($_SESSION['loggedIn']))
@@ -8,13 +9,11 @@ if (!isset($_SESSION['loggedIn']))
     $link = "<a href='login.php'>login</a>";
     echo "You have to " . $link . " to view this page!";
 }
-
-if (!empty($_POST))
+else
 {
-
+    $t = new Tour();
+    $alltours = $t->getAll();
 }
-
-$alltours = "lel";
 
 ?>
 
@@ -35,86 +34,58 @@ $alltours = "lel";
 </head>
 <body>
 
+<nav id="nav" class="container no-bg">
+    
+    <div class="inner_nav">
+       
+       <a href="profile.php" class="std_nav">My Profile</a>
+       <a href="about.php" class="std_nav">About MyGuide</a>
+       <a href="contact.php" class="std_nav">Contact us</a>
+       <a href="classes/logout.php" class="red_nav" id="logout">Logout</a>
+       
+    </div>
+    
+</nav>
+
 <div class="container no-bg">
     
     <?PHP if (isset($_SESSION['loggedIn'])): ?>
 
     <header id="logged-in-header">
-        <a href=""><img class="btn_nav" src="images/btn_nav.png" alt="Nav button"></a>
+        <img class="btn_nav" id="btn_nav" src="images/btn_nav.svg" alt="Nav button">
         <h2 class="header_h">Tours</h2>
-        <img id="click_search" class="btn_search" src="images/btn_search.png" alt="Search button">
+        <img id="click_search" class="btn_search" src="images/btn_search.svg" alt="Search button">
     </header>
 
     <div class="search">
         <input type="text" id="term" name="term" placeholder="Search">
         <input type="submit" id="search_button" value="">
     </div>
-    
-    <?PHP if (!isset($alltours)): ?>
-        
-        <p class="feedback">There are no tours nearby you!</p>
-    
-    <?PHP endif ?>
 
-    <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
-        
-        <div class="content_tour_preview">
+    <?php
+    while($row = $alltours->fetch(PDO::FETCH_ASSOC)) : ?>
 
-            <div class="left">
-            <h3>Sint-Rombouts tour</h3>
-            <p class="detail guide">by: Jan Smit</p>
-            <p class="detail duration">duration: 1h</p>
-            
-            <p class="price">&euro;50</p>
+        <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
+
+            <div class="content_tour_preview">
+
+                <div class="left">
+                    <h3><?php echo $row['name']; ?></h3>
+                    <p class="detail guide">by: Jan Smit</p>
+                    <p class="detail duration">duration: <?php echo $row['duration']; ?>h</p>
+
+                    <p class="price">&euro;<?php echo $row['price']; ?></p>
+                </div>
+
+                <div class="right">
+                    <a href="detail.php?id=<?PHP echo $row['id']; ?>"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
+                </div>
+
             </div>
-            
-            <div class="right">
-            <a href="detail.php"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
-            </div>
-        
-        </div>
 
-    </section>
-    
-    <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
-        
-        <div class="content_tour_preview">
+        </section>
 
-            <div class="left">
-            <h3>Sint-Rombouts tour</h3>
-            <p class="detail guide">by: Jan Smit</p>
-            <p class="detail duration">duration: 1h</p>
-            
-            <p class="price">&euro;50</p>
-            </div>
-            
-            <div class="right">
-            <a href="detail.php"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
-            </div>
-        
-        </div>
-
-    </section>
-    
-    <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
-        
-        <div class="content_tour_preview">
-
-            <div class="left">
-            <h3>Sint-Rombouts tour</h3>
-            <p class="detail guide">by: Jan Smit</p>
-            <p class="detail duration">duration: 1h</p>
-            
-            <p class="price">&euro;50</p>
-            </div>
-            
-            <div class="right">
-            <a href="detail.php"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
-            </div>
-        
-        </div>
-
-    </section>
+    <?PHP endwhile; ?>
     
     <footer>
 
