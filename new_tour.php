@@ -2,34 +2,15 @@
 
 if (!empty($_POST))
 {
-    include_once("classes/Guide.class.php");
-    include_once("classes/Tourist.class.php");
-
+    include_once("classes/Tour.class.php");
     try
     {
-        if (!empty($_POST['type']))
-        {
-            $type_guide = $_POST['type'];
-        }
-        else
-        {
-            throw new Exception("Type is required!");
-        }
-        switch($type_guide)
-        {
-            case 'tourist':
-                $u = new Tourist();
-                break;
-
-            case 'guide':
-                $u = new Guide();
-                break;
-        }
-        $u->checkPass($_POST['pass'],$_POST['pass_rep']);
-        $u->Name = $_POST['name'];
-        $u->Email = $_POST['email'];
-        $u->Password = $_POST['pass'];
-        $u->save();
+        $t = new Tour();
+        $t->Name = $_POST['name'];
+        $t->Duration = $_POST['duration'];
+        $t->Price = $_POST['price'];
+        $t->Description = $_POST['description'];
+        $t->save();
     }
     catch (Exception $e)
     {
@@ -55,7 +36,7 @@ if (!empty($_POST))
 </head>
 <body>
 
-<div class="container">
+<div class="container no-bg">
 
     <header id="logged-in-header">
         <a href=""><img class="btn_nav" src="images/btn_nav.png" alt="Nav button"></a>
@@ -67,16 +48,11 @@ if (!empty($_POST))
         <form action="" method="post">
 
             <input type="text" id="name" name="name" placeholder="Name"><br>
-            <input type="email" id="email" name="email" placeholder="Email address"><br>
-            <input type="password" id="pass" name="pass" placeholder="Password"><br>
-            <input type="password" id="pass_rep" name="pass_rep" placeholder="Retype password"><br>
+            <input type="number" id="price" name="price" placeholder="Price"><br>
+            <input type="number" id="duration" name="duration" placeholder="Duration (h)"><br>
+            <input type="text" id="description" name="description" placeholder="Description"><br>
 
-            <div class="container_radio">
-                <input class="radio_btn" type="radio" name="type" id="tourist" value="tourist"><label class="label_radio_button" for="tourist">I'm a tourist</label></input><br>
-                <input class="radio_btn" type="radio" name="type" id="guide" value="guide"><label class="label_radio_button" for="guide">I'm a guide</label>
-            </div>
-
-            <input type="submit" id="login_screen_button" value="Register!">
+            <input type="submit" id="login_screen_button" value="Create this tour">
 
         </form>
 
