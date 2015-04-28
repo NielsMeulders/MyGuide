@@ -33,7 +33,7 @@
         }
         catch (Exception $e)
         {
-            echo $e->getMessage();
+            $error = $e->getMessage();
         }
     }
 
@@ -61,6 +61,10 @@
             <a href="index.php"><img class="btn_back" src="images/btn_back.svg" alt="Return button"></a>
             <img src="images/logo_full.png" alt="logo">
         </header>
+
+        <?PHP if (isset($error)): ?>
+            <div class="error"><?PHP echo $error; ?></div>
+        <?PHP endif; ?>
         
         <section class="form">
             

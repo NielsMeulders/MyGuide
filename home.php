@@ -15,6 +15,21 @@ else
     $alltours = $t->getAll();
 }
 
+try
+{
+    $conn = Db::getInstance();
+    $user = $conn->prepare("SELECT * FROM tbl_guide WHERE id=?");
+    $user->execute(array($_SESSION['userid']));
+    $row = $user->fetch(PDO::FETCH_ASSOC);
+}
+catch (Exception $e)
+{
+    $error = $e->getMessage();
+}
+
+$name = substr($row['name'], 0, strpos($row['name'], " "));
+$image = $row['profile_pic']
+
 ?>
 
 
@@ -37,6 +52,22 @@ else
 <nav id="nav" class="container no-bg">
     
     <div class="inner_nav">
+      
+      <div class="profile_pic" style="background-image: url('<?PHP echo $image; ?>')"></div>
+      
+
+      <?PHP 
+            $time = date("h");
+
+            if ($time > 0 && $time < 7): $day_quote = "Goedenacht";
+            elseif ($time >= 7 && $time < 12): $day_quote = "Goedemorgen";
+            elseif ($time >= 12 && $time < 19): $day_quote = "Goedemiddag";
+            elseif ($time >= 19 && $time != 0): $day_quote = "Goedenavond";
+            endif;
+
+        echo '<h2>' . $day_quote .' ' . $name .'!</h2>';
+
+      ?>
        
        <a href="profile.php" class="std_nav">My Profile</a>
        <a href="about.php" class="std_nav">About MyGuide</a>

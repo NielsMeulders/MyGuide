@@ -4,27 +4,60 @@
 
     if (!empty($_POST))
     {
+        try
+        {
         session_start();
         ini_set('session.gc_maxlifetime', 3600*24*30);
         session_set_cookie_params(3600*24*30);
-        
-        try
+        if (!empty($_POST['type']))
         {
+            $type_guide = $_POST['type'];
+        }
+        else
+        {
+            throw new Exception("Kies uw type!");
+        }
+
             $conn = Db::getInstance();
-            $post = $conn->prepare("SELECT * FROM tbl_guide WHERE email=?");
+            switch ($type_guide)
+            {
+                case 'tourist':
+                    $post = $conn->prepare("SELECT * FROM tbl_tourist WHERE email=?");
+                    break;
+
+                case 'guide':
+                    $post = $conn->prepare("SELECT * FROM tbl_guide WHERE email=?");
+                    break;
+            }
+
             $post->execute(array($_POST['email']));
             $row = $post->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($_POST['pass'], $row['password'])) {
                 $_SESSION['loggedIn']=true;
-                header('Location: home.php');
+                switch ($type_guide)
+                {
+                    case 'tourist':
+                        $_SESSION['type']= "tourist";
+                        $_SESSION['userid']= $row['id'];
+                        header('Location: home.php');
+                        break;
+
+                    case 'guide':
+                        $_SESSION['type']= "guide";
+                        $_SESSION['userid']= $row['id'];
+                        //header('Location: guide_home.php');
+                        header('Location: home.php');
+                        break;
+                }
+
             } else {
-                throw new Exception("Password is incorrect!");
+                throw new Exception("Gebruikersnaam of wachtwoord onjuist!");
             }
         }
         catch(Exception $e)
         {
-            echo $e->getMessage();
+            $error = $e->getMessage();
         }
     }
 
@@ -46,11 +79,15 @@
 <body>
 
     <div class="container">
-        
+
         <header>
             <a href="index.php"><img class="btn_back" src="images/btn_back.svg" alt="Return button"></a>
             <img src="images/logo_full.png" alt="logo">
         </header>
+
+        <?PHP if (isset($error)): ?>
+            <div class="error"><?PHP echo $error; ?></div>
+        <?PHP endif; ?>
         
         <section class="form">
             
@@ -58,6 +95,11 @@
             
                 <input type="text" id="email" name="email" placeholder="Email address"><br>
                 <input type="password" id="pass" name="pass" placeholder="Password">
+
+                <div class="container_radio">
+                    <input class="radio_btn" type="radio" name="type" id="tourist" value="tourist"><label class="label_radio_button" for="tourist">I'm a tourist</label></input><br>
+                    <input class="radio_btn" type="radio" name="type" id="guide" value="guide"><label class="label_radio_button" for="guide">I'm a guide</label>
+                </div>
 
                 <input type="submit" id="login_screen_button" value="Log in!">
             

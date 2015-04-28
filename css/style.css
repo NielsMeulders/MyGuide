@@ -30,6 +30,25 @@ body, html
     clear: both;
 }
 
+.error, .feedback
+{
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    z-index: 110;
+}
+
+.error
+{
+    background-color: #FF9494;
+}
+
+.feedback
+{
+    background-color: #E7FADD;
+}
+
 .center
 {
     text-align: center;
@@ -412,6 +431,28 @@ nav .red_nav
 nav .std_nav
 {
     background-color: #2980B9;
+}
+
+.profile_pic
+{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 150px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+.inner_nav h2
+{
+    color: #F2F2F2;
+    margin-bottom: 20px;
+    font-size: 1.4em;
 }
 
 #logout
