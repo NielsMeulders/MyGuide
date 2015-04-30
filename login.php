@@ -46,8 +46,7 @@
                     case 'guide':
                         $_SESSION['type']= "guide";
                         $_SESSION['userid']= $row['id'];
-                        //header('Location: guide_home.php');
-                        header('Location: home.php');
+                        header('Location: guide_home.php');
                         break;
                 }
 

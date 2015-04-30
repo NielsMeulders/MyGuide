@@ -39,7 +39,7 @@ if (!empty($_POST))
 <div class="container no-bg">
 
     <header id="logged-in-header">
-        <a href=""><img class="btn_nav" src="images/btn_nav.png" alt="Nav button"></a>
+        <a href="guide_home.php"><img class="btn_back btn_back_detail" src="images/btn_back.svg" alt="Return button"></a>
         <h2 class="header_h">Add a new tour</h2>
     </header>
 

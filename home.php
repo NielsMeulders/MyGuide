@@ -57,7 +57,7 @@ $image = $row['profile_pic']
       
 
       <?PHP 
-            $time = date("h");
+            $time = date("G");
 
             if ($time > 0 && $time < 7): $day_quote = "Goedenacht";
             elseif ($time >= 7 && $time < 12): $day_quote = "Goedemorgen";

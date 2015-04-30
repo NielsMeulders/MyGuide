@@ -7,7 +7,6 @@
         private $m_sEmail;
         private $m_sPassword;
         private $m_sType;
-        private $m_sGuideNr;
 
         public function __set($p_sProperty, $p_vValue)
         {
@@ -64,17 +63,6 @@
                         throw new Exception("Type is required!");
                     }
                     break;
-
-                case 'GuideNr':
-                    if ($p_vValue!="")
-                    {
-                        $this->m_sGuideNr = $p_vValue;
-                    }
-                    else
-                    {
-                        $this->m_sGuideNr = null;
-                    }
-                    break;
             }
         }
 
@@ -100,27 +88,6 @@
             }
         }
 
-        public function save()
-        {
-            $conn = Db::getInstance();
-            // errors doorsturen van de database
-            // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $statement = $conn->prepare('INSERT INTO tbl_guide (name,email,password,guidenr) VALUES  ( :name,:email,:password,:guidenr)');
-
-            $statement->bindValue(':name',$this->Name);
-            $statement->bindValue(':email',$this->Email);
-            $statement->bindValue(':password',$this->Password);
-            $statement->bindValue(':guidenr',$this->GuideNr);
-            $statement->execute();
-        }
-
-        public function getAll()
-        {
-            $conn = Db::getInstance();
-            $allposts = $conn->query("SELECT * FROM tbl_guide");
-            return $allposts;
-        }
-
         public function checkPass($pass1, $pass2)
         {
             if (strlen($pass1)<=5)
@@ -138,23 +105,6 @@
                     throw new Exception("Passwords don't match!");
                 }
             }
-        }
-
-        public function checkEmail($p_sCheckEmail)
-        {
-            $ret = true;
-
-            $all_mails = $this->getAll();
-            while($row = $all_mails->fetch(PDO::FETCH_ASSOC)) {
-
-                if($row['email'] == $p_sCheckEmail)
-                {
-                    $ret = false;
-                }
-
-            }
-
-            return $ret;
         }
 
     }

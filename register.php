@@ -19,10 +19,22 @@
             {
                 case 'tourist':
                     $u = new Tourist();
+                    $u->Profile_pic = "images/profile_pics/".$_POST['email']."/".basename( $_FILES["fileToUpload"]["name"]);
+                    $dir = $_POST['email'];
+                    if (!file_exists("images/profile_pics/$dir")) {
+                        mkdir("images/profile_pics/$dir", 0777, true);
+                    }
+                    include_once("upload.php");
                     break;
 
                 case 'guide':
                     $u = new Guide();
+                    $u->ProfilePic = "images/profile_pics/".$_POST['email']."/".basename( $_FILES["fileToUpload"]["name"]);
+                    $dir = $_POST['email'];
+                    if (!file_exists("images/profile_pics/$dir")) {
+                        mkdir("images/profile_pics/$dir", 0777, true);
+                    }
+                    include_once("upload.php");
                     break;
             }
             $u->checkPass($_POST['pass'],$_POST['pass_rep']);
@@ -68,12 +80,14 @@
         
         <section class="form">
             
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
             
                <input type="text" id="name" name="name" placeholder="Name"><br>
                <input type="email" id="email" name="email" placeholder="Email address"><br>
                <input type="password" id="pass" name="pass" placeholder="Password"><br>
                <input type="password" id="pass_rep" name="pass_rep" placeholder="Retype password"><br>
+               <label for="pic">Profielfoto (max 500Kb)</label>
+               <input type="file" name="fileToUpload" id="fileToUpload">
                
                <div class="container_radio">
                    <input class="radio_btn" type="radio" name="type" id="tourist" value="tourist"><label class="label_radio_button" for="tourist">I'm a tourist</label></input><br>
