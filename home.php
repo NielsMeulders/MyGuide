@@ -18,17 +18,16 @@ else
 try
 {
     $conn = Db::getInstance();
-    $user = $conn->prepare("SELECT * FROM tbl_guide WHERE id=?");
+    $user = $conn->prepare("SELECT * FROM tbl_tourist WHERE id=?");
     $user->execute(array($_SESSION['userid']));
-    $row = $user->fetch(PDO::FETCH_ASSOC);
+    $us = $user->fetch(PDO::FETCH_ASSOC);
 }
 catch (Exception $e)
 {
     $error = $e->getMessage();
 }
 
-$name = substr($row['name'], 0, strpos($row['name'], " "));
-$image = $row['profile_pic']
+$name = substr($us['name'], 0, strpos($us['name'], " "));
 
 ?>
 
@@ -52,9 +51,6 @@ $image = $row['profile_pic']
 <nav id="nav" class="container no-bg">
     
     <div class="inner_nav">
-      
-      <div class="profile_pic" style="background-image: url('<?PHP echo $image; ?>')"></div>
-      
 
       <?PHP 
             $time = date("G");
@@ -69,9 +65,9 @@ $image = $row['profile_pic']
 
       ?>
        
-       <a href="profile.php" class="std_nav">My Profile</a>
+       <!--<a href="profile.php" class="std_nav">My Profile</a>
        <a href="about.php" class="std_nav">About MyGuide</a>
-       <a href="contact.php" class="std_nav">Contact us</a>
+       <a href="contact.php" class="std_nav">Contact us</a>-->
        <a href="classes/logout.php" class="red_nav" id="logout">Logout</a>
        
     </div>
@@ -82,11 +78,13 @@ $image = $row['profile_pic']
     
     <?PHP if (isset($_SESSION['loggedIn'])): ?>
 
-    <header id="logged-in-header">
-        <img class="btn_nav" id="btn_nav" src="images/btn_nav.svg" alt="Nav button">
-        <h2 class="header_h">Tours</h2>
-        <img id="click_search" class="btn_search" src="images/btn_search.svg" alt="Search button">
-    </header>
+    <div class="fixed_nav">
+        <header id="logged-in-header">
+            <img class="btn_nav" id="btn_nav" src="images/btn_nav.svg" alt="Nav button">
+            <h2 class="header_h">Tours</h2>
+            <img id="click_search" class="btn_search" src="images/btn_search.svg" alt="Search button">
+        </header>
+    </div>
 
     <div class="search">
         <input type="text" id="term" name="term" placeholder="Search">
@@ -96,20 +94,20 @@ $image = $row['profile_pic']
     <?php
     while($row = $alltours->fetch(PDO::FETCH_ASSOC)) : ?>
 
-        <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
+        <section class="tour_preview" style="background-image: url('<?php echo $row['picture']; ?>')">
 
             <div class="content_tour_preview">
 
                 <div class="left">
-                    <h3><?php echo $row['name']; ?></h3>
-                    <p class="detail guide">by: Jan Smit</p>
+                    <h3><?php echo $row['tour_name']; ?></h3>
+                    <p class="detail guide">by: <?php echo $row['guide_name']; ?></p>
                     <p class="detail duration">duration: <?php echo $row['duration']; ?>h</p>
 
                     <p class="price">&euro;<?php echo $row['price']; ?></p>
                 </div>
 
                 <div class="right">
-                    <a href="detail.php?id=<?PHP echo $row['id']; ?>"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
+                    <a href="detail.php?id=<?PHP echo $row['tour_id']; ?>"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
                 </div>
 
             </div>

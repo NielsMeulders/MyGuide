@@ -16,7 +16,8 @@ elseif ($_SESSION['type']!="guide")
 else
 {
     $t = new Tour();
-    $alltours = $t->getAll();
+    $conn = Db::getInstance();
+    $alltours = $t->getMyTours($_SESSION['userid']);
 }
 
 try
@@ -74,9 +75,9 @@ $image = $row['profile_pic']
         ?>
 
         <a href="new_tour.php" class="std_nav">Add a new tour</a>
-        <a href="profile.php" class="std_nav">My Profile</a>
+        <!--<a href="profile.php" class="std_nav">My Profile</a>
         <a href="about.php" class="std_nav">About MyGuide</a>
-        <a href="contact.php" class="std_nav">Contact us</a>
+        <a href="contact.php" class="std_nav">Contact us</a>-->
         <a href="classes/logout.php" class="red_nav" id="logout">Logout</a>
 
     </div>
@@ -87,41 +88,56 @@ $image = $row['profile_pic']
 
     <?PHP if (isset($_SESSION['loggedIn'])): ?>
 
+        <div class="fixed_nav">
         <header id="logged-in-header">
             <img class="btn_nav" id="btn_nav" src="images/btn_nav.svg" alt="Nav button">
             <h2 class="header_h">My Tours</h2>
             <img id="click_search" class="btn_search" src="images/btn_search.svg" alt="Search button">
         </header>
+        </div>
 
         <div class="search">
             <input type="text" id="term" name="term" placeholder="Search">
             <input type="submit" id="search_button" value="">
         </div>
 
-        <?php
-        while($row = $alltours->fetch(PDO::FETCH_ASSOC)) : ?>
+        <section class="tours">
 
-            <section class="tour_preview" style="background-image: url('images/tours/tour.jpg')">
+            <?php
+            while($row = $alltours->fetch(PDO::FETCH_ASSOC)) : ?>
 
-                <div class="content_tour_preview">
+                <section class="tour_preview" style="background-image: url('<?PHP echo $row['picture'] ?>')">
 
-                    <div class="left">
-                        <h3><?php echo $row['name']; ?></h3>
-                        <p class="detail guide">by: Jan Smit</p>
-                        <p class="detail duration">duration: <?php echo $row['duration']; ?>h</p>
+                    <div class="content_tour_preview">
 
-                        <p class="price">&euro;<?php echo $row['price']; ?></p>
+                        <div class="left">
+                            <h3><?php
+                                if (strlen($row['tour_name'])>40)
+                                {
+                                    echo substr($row['tour_name'],0,40)."...";
+                                }
+                                else
+                                {
+                                    echo $row['tour_name'];
+                                }
+                                ?></h3>
+                            <p class="detail guide">by: <?php echo $row['guide_name']; ?></p>
+                            <p class="detail duration">duration: <?php echo $row['duration']; ?>h</p>
+
+                            <p class="price">&euro;<?php echo $row['price']; ?></p>
+                        </div>
+
+                        <div class="right">
+                            <a href="guide_tour_detail.php?id=<?PHP echo $row['tour_id']; ?>"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
+                        </div>
+
                     </div>
 
-                    <div class="right">
-                        <a href="detail.php?id=<?PHP echo $row['id']; ?>"><img class="btn_detail" src="images/btn_detail.png" alt="Detail button"></a>
-                    </div>
+                </section>
 
-                </div>
+            <?PHP endwhile; ?>
 
-            </section>
-
-        <?PHP endwhile; ?>
+        </section>
 
         <footer>
 

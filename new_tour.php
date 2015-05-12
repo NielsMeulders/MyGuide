@@ -1,16 +1,23 @@
 <?PHP
 
+session_start();
+
 if (!empty($_POST))
 {
     include_once("classes/Tour.class.php");
     try
     {
         $t = new Tour();
+        $t->GuideId = $_SESSION['userid'];
         $t->Name = $_POST['name'];
         $t->Duration = $_POST['duration'];
         $t->Price = $_POST['price'];
         $t->Description = $_POST['description'];
+        $t->Profile_pic = "images/tours/".basename( $_FILES["fileToUpload"]["name"]);
+        include_once("upload_tour.php");
         $t->save();
+
+        header('location: guide_home.php');
     }
     catch (Exception $e)
     {
@@ -45,12 +52,13 @@ if (!empty($_POST))
 
     <section class="form">
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
             <input type="text" id="name" name="name" placeholder="Name"><br>
             <input type="number" id="price" name="price" placeholder="Price"><br>
             <input type="number" id="duration" name="duration" placeholder="Duration (h)"><br>
             <input type="text" id="description" name="description" placeholder="Description"><br>
+            <input type="file" name="fileToUpload" id="fileToUpload">
 
             <input type="submit" id="login_screen_button" value="Create this tour">
 

@@ -17,6 +17,12 @@ else
     $alltours = $conn->query("SELECT tbl_tour.id as tour_id, guide_id,tbl_tour.name as tour_name,duration, price, tbl_tour.description as tour_description, tbl_guide.name as guide_name, email, password, guidenr, profile_pic, tbl_guide.description as guide_description, picture FROM tbl_tour INNER JOIN tbl_guide ON tbl_tour.guide_id = tbl_guide.id WHERE tbl_tour.id = $id");
     $tour = $alltours->fetch(PDO::FETCH_ASSOC);
 
+    if (!empty($_POST['remove']))
+    {
+        $conn->query("DELETE FROM tbl_tour WHERE id=$id");
+        header('location: guide_home.php');
+    }
+
 }
 
 ?>
@@ -39,15 +45,15 @@ else
 <body>
 
 <div class="container no-bg detail_page">
-    
-    <?PHP if (isset($_SESSION['loggedIn'])): ?>
 
-    <header id="logged-in-header">
-        <a href="home.php"><img class="btn_back btn_back_detail" src="images/btn_back.svg" alt="Return button"></a>
-        <h2 class="header_h">Detail</h2>
-    </header>
-    
-    <section class="tour_detail" style="background-image: url('<?PHP echo $tour['picture'] ?>')">
+    <?PHP if (isset($_SESSION['loggedIn']) && $_SESSION['type']=='guide'): ?>
+
+        <header id="logged-in-header">
+            <a href="guide_home.php"><img class="btn_back btn_back_detail" src="images/btn_back.svg" alt="Return button"></a>
+            <h2 class="header_h">Detail</h2>
+        </header>
+
+        <section class="tour_detail" style="background-image: url('<?PHP echo $tour['picture'] ?>')">
 
             <div class="content_tour_detail">
 
@@ -56,29 +62,33 @@ else
                 <p class="detail duration">duration: <?php echo $tour['duration']; ?>h</p>
 
                 <p class="price">&euro;<?php echo $tour['price']; ?></p>
-                
+
                 <div class="clearfix"></div>
 
             </div>
 
-    </section>
-    
-    <section class="about_the_tour">
-        
-        <h4>About the tour <span></span></h4>
-        <p><?PHP echo $tour['tour_description']; ?></p>
-        
-    </section>
-    
-    <section class="about_the_guide">
-        
-        <h4>About the guide <span></span></h4>
-        <p><?PHP echo $tour['guide_description']; ?></p>
-        
-    </section>
+        </section>
+
+        <section class="about_the_tour">
+
+            <h4>About the tour <span></span></h4>
+            <p><?PHP echo nl2br($tour['tour_description']); ?></p>
+
+        </section>
+
+        <section class="about_the_guide">
+
+            <h4>About the guide <span></span></h4>
+            <p><?PHP echo nl2br($tour['guide_description']); ?></p>
+
+        </section>
+
+        <form action="" method="post">
+            <input type="submit" name="remove" class="delete_btn" value="Delete this tour">
+        </form>
 
     <?PHP endif; ?>
-    
+
 
 </div>
 

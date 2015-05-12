@@ -29,6 +29,7 @@
 
                 case 'guide':
                     $u = new Guide();
+                    $u->GuideNr = $_POST['guide_nr'];
                     $u->ProfilePic = "images/profile_pics/".$_POST['email']."/".basename( $_FILES["fileToUpload"]["name"]);
                     $dir = $_POST['email'];
                     if (!file_exists("images/profile_pics/$dir")) {
@@ -42,6 +43,7 @@
             $u->Email = $_POST['email'];
             $u->Password = $_POST['pass'];
             $u->save();
+            header('location: index.php');
         }
         catch (Exception $e)
         {
@@ -82,10 +84,12 @@
             
             <form action="" method="post" enctype="multipart/form-data">
             
-               <input type="text" id="name" name="name" placeholder="Name"><br>
-               <input type="email" id="email" name="email" placeholder="Email address"><br>
-               <input type="password" id="pass" name="pass" placeholder="Password"><br>
-               <input type="password" id="pass_rep" name="pass_rep" placeholder="Retype password"><br>
+               <input type="text" id="name" name="name" placeholder="Naam"><br>
+               <input type="email" id="email" name="email" placeholder="Email adres"><br>
+               <input type="password" id="pass" name="pass" placeholder="Wachtwoord"><br>
+               <input type="password" id="pass_rep" name="pass_rep" placeholder="Herhaal wachtwoord"><br>
+                <label for="guide_nr">(Enkel voor geregistreerde gidsen)</label>
+               <input type="text" id="guide_nr" name="guide_nr" placeholder="Gidsnummer"><br>
                <label for="pic">Profielfoto (max 500Kb)</label>
                <input type="file" name="fileToUpload" id="fileToUpload">
                

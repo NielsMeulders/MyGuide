@@ -4,7 +4,14 @@
 
     if(isset($_SESSION['loggedIn']))
     {
-        header('Location: home.php');
+        if ($_SESSION['type']=="tourist")
+        {
+            header('Location: home.php');
+        }
+        else
+        {
+            header('Location: guide_home.php');
+        }
     }
 
 ?>

@@ -127,6 +127,18 @@ footer
     
 }
 
+.tours
+{
+    
+}
+
+.fixed_nav
+{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
 header
 {
     background-color: rgba(242, 242, 242, .85);
@@ -152,6 +164,15 @@ header img
     top: -3px;
 }
 
+.delete_btn
+{
+    background-color: #E73A30;
+    padding: 10px 15px;
+    border: none;
+    color: #F2F2F2;
+    margin-bottom: 30px;
+}
+
 .form
 {
     margin-top: 75px;
@@ -170,6 +191,11 @@ header img
     border-radius: 5px;
     font-size: 1.5em;
     padding: 10px 15px;
+}
+
+form label
+{
+    color: #F2F2F2;
 }
 
 ::-webkit-input-placeholder
@@ -279,6 +305,7 @@ input.radio_btn
 .left
 {
     float: left;
+    max-width: 80%;
 }
 
 .right
@@ -352,6 +379,7 @@ input.radio_btn
     visibility: hidden;
     height: 0;
     opacity: 0;
+    padding-top: 55px;
     transition: height .3s ease-in-out, opacity 1s ease-in;
 }
 
@@ -392,7 +420,7 @@ nav.container
     width: 100%;
     max-width: 500px;
     background-color: #333333;
-    position: absolute;
+    position: fixed;
     left: -100%;
     transition: left .5s ease-out;
     z-index: 100;
@@ -401,11 +429,12 @@ nav.container
 nav.visible
 {
     left: 0;
+    position: fixed;
 }
 
 .inner_nav
 {
-    margin-top: 55px;
+    margin-top: 70px;
 }
 
 nav a:link,
